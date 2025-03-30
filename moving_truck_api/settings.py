@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'corsheaders', 
     'rest_framework_simplejwt',
     'djoser',
+    'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [
@@ -57,15 +60,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTH_USER_MODEL = 'trucks.CustomUser'  # Ensure this matches your user model
+AUTH_USER_MODEL = 'trucks.CustomUser'  
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SIMPLE_JWT = {

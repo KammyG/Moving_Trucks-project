@@ -1,11 +1,13 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import Truck, Booking, Review
+from django.contrib.auth.models import User
 
 User = get_user_model()
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'phone_number', 'password']
