@@ -1,0 +1,24 @@
+### User Login
+POST http://127.0.0.1:8000/api/login/
+Content-Type: application/json
+
+{
+  "email": "muriukichristiana@gmail.com",
+  "password": "Mmohana189##"
+}
+
+### Get Truck List (Requires Auth Token)
+GET http://127.0.0.1:8000/api/trucks/
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+### Book a Truck
+POST http://127.0.0.1:8000/api/bookings/
+Content-Type: application/json
+Authorization: Bearer YOUR_ACCESS_TOKEN
+
+{
+  "truck_id": 1,
+  "pickup_location": "Nairobi",
+  "dropoff_location": "Mombasa",
+  "date": "2025-04-04"
+}
