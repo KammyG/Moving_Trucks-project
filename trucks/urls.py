@@ -29,4 +29,6 @@ urlpatterns = [
     path('bookings/<int:pk>/', BookingDetailView.as_view(), name='booking-detail'),
     path('trucks/<int:truck_id>/reviews/', TruckReviewListView.as_view(), name='truck-reviews'),
     path("", api_root, name="api-root"),
+    path('reviews/', ReviewCreateView.as_view(), name='reviews'),
+
 ]
