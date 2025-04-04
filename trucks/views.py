@@ -7,6 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.shortcuts import get_object_or_404
 from .models import Truck, Booking, Review
 from .serializers import UserSerializer, TruckSerializer, BookingSerializer, ReviewSerializer
+from rest_framework.permissions import IsAdminUser
 
 User = get_user_model()
 
@@ -74,6 +75,18 @@ class UserProfileView(APIView):
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class DeleteUserView(APIView):
+    permission_classes = [IsAdminUser]  
+
+    def delete(self, request, user_id):
+        user = get_object_or_404(User, id=user_id)
+
+        if user == request.user:
+            return Response({"error": "You cannot delete your own account."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user.delete()
+        return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
 
 class TruckListView(generics.ListCreateAPIView):
     queryset = Truck.objects.all()

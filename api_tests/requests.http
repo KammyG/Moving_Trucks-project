@@ -35,8 +35,8 @@ Content-Type: application/json
 }
 
 ### Delete User (Admin Only)
-DELETE http://127.0.0.1:8000/api/users/1/
-Authorization: Bearer <ADMIN-JWT-TOKEN>
+DELETE http://127.0.0.1:8000/api/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODUxMjk4LCJpYXQiOjE3NDM3NjQ4OTgsImp0aSI6ImRhZWM1OGQ4NWYwYTRmOTE5ZTc1Njc5MzY1ZjdmMjNmIiwidXNlcl9pZCI6M30.Ivfy1JwtGt3qsydKJekvHwfoImRHiQXxCa5sPk4lBK4
 
 ### Get Truck List (Requires Auth Token)
 GET http://127.0.0.1:8000/api/trucks/
