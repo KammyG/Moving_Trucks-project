@@ -2,10 +2,10 @@ from django.urls import path
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from rest_framework_simplejwt.views import TokenRefreshView  
+from rest_framework_simplejwt.views import TokenRefreshView
 from .views import (
     RegisterUserView, ObtainTokenView, TruckListView, ReviewCreateView,
-    BookingListView, BookingDetailView, TruckReviewListView, UserProfileView
+    BookingListView, BookingDetailView, DeleteUserView, TruckReviewListView, UserProfileView
 )
 
 @api_view(["GET"])
@@ -18,6 +18,7 @@ def api_root(request):
         "trucks": "/api/trucks/",
         "bookings": "/api/bookings/",
         "reviews": "/api/reviews/",
+        "users": "/api/users/",
     })
 
 urlpatterns = [
@@ -30,5 +31,6 @@ urlpatterns = [
     path('trucks/<int:truck_id>/reviews/', TruckReviewListView.as_view(), name='truck-reviews'),
     path("", api_root, name="api-root"),
     path('reviews/', ReviewCreateView.as_view(), name='reviews'),
-    path('profile/', UserProfileView.as_view(), name='profile'), 
+    path('users/<int:pk>/', DeleteUserView.as_view(), name='delete-user'),  # Correct path here
+    path('profile/', UserProfileView.as_view(), name='profile'),
 ]
