@@ -31,6 +31,5 @@ urlpatterns = [
     path('trucks/<int:truck_id>/reviews/', TruckReviewListView.as_view(), name='truck-reviews'),
     path("", api_root, name="api-root"),
     path('reviews/', ReviewCreateView.as_view(), name='reviews'),
-    path('users/<int:pk>/', DeleteUserView.as_view(), name='delete-user'),  # Correct path here
-    path('profile/', UserProfileView.as_view(), name='profile'),
+    path('users/delete/', DeleteUserView.as_view(), name='delete-user'),
 ]

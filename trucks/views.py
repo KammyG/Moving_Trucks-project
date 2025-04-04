@@ -77,16 +77,14 @@ class UserProfileView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class DeleteUserView(APIView):
-    permission_classes = [IsAdminUser]  
+    permission_classes = [permissions.IsAuthenticated]
 
-    def delete(self, request, user_id):
-        user = get_object_or_404(User, id=user_id)
+    def delete(self, request):
+        request.user.delete()
+        return Response({"message": "User account deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
 
-        if user == request.user:
-            return Response({"error": "You cannot delete your own account."}, status=status.HTTP_400_BAD_REQUEST)
-        
-        user.delete()
-        return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+
 
 class TruckListView(generics.ListCreateAPIView):
     queryset = Truck.objects.all()
