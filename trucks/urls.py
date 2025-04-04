@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenRefreshView  
 from .views import (
     RegisterUserView, ObtainTokenView, TruckListView, ReviewCreateView,
-    BookingListView, BookingDetailView, TruckReviewListView
+    BookingListView, BookingDetailView, TruckReviewListView, UserProfileView
 )
 
 @api_view(["GET"])
@@ -30,5 +30,5 @@ urlpatterns = [
     path('trucks/<int:truck_id>/reviews/', TruckReviewListView.as_view(), name='truck-reviews'),
     path("", api_root, name="api-root"),
     path('reviews/', ReviewCreateView.as_view(), name='reviews'),
-
+    path('profile/', UserProfileView.as_view(), name='profile'), 
 ]

@@ -1,4 +1,16 @@
-### User Login
+### User Registration
+POST http://127.0.0.1:8000/api/register/
+Content-Type: application/json
+
+{
+  "email": "admin001@gmail.com",
+  "password": "bl@ckh@t123#",
+  "username": "Admin",
+  "phone_number": "1234567880"  
+}
+
+
+### User Login (Get Token)
 POST http://127.0.0.1:8000/api/login/
 Content-Type: application/json
 
@@ -7,18 +19,124 @@ Content-Type: application/json
   "password": "bl@ckh@t123#"
 }
 
+### Get Logged-In User Profile
+GET http://127.0.0.1:8000/api/profile/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODUxMjk4LCJpYXQiOjE3NDM3NjQ4OTgsImp0aSI6ImRhZWM1OGQ4NWYwYTRmOTE5ZTc1Njc5MzY1ZjdmMjNmIiwidXNlcl9pZCI6M30.Ivfy1JwtGt3qsydKJekvHwfoImRHiQXxCa5sPk4lBK4
+
+### Update User Profile
+PUT http://127.0.0.1:8000/api/profile/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODUxMjk4LCJpYXQiOjE3NDM3NjQ4OTgsImp0aSI6ImRhZWM1OGQ4NWYwYTRmOTE5ZTc1Njc5MzY1ZjdmMjNmIiwidXNlcl9pZCI6M30.Ivfy1JwtGt3qsydKJekvHwfoImRHiQXxCa5sPk4lBK4
+Content-Type: application/json
+
+{
+  "first_name": "Jane",
+  "last_name": "Doe",
+  "email": "newemail@example.com"
+}
+
+### Delete User (Admin Only)
+DELETE http://127.0.0.1:8000/api/users/1/
+Authorization: Bearer <ADMIN-JWT-TOKEN>
+
 ### Get Truck List (Requires Auth Token)
 GET http://127.0.0.1:8000/api/trucks/
-Authorization: Bearer YOUR_ACCESS_TOKEN
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+
+### Create a Truck
+POST http://127.0.0.1:8000/api/trucks/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+Content-Type: application/json
+
+{
+  "name": "Swift Mover",
+  "location": "Nairobi",
+  "available": true,
+  "price_per_km": 120,
+  "license_plate": "KCF 123X",
+  "model": "Isuzu NQR",
+  "capacity": 3000,
+  "owner": 1
+}
+
+### Get Details of a Specific Truck
+GET http://127.0.0.1:8000/api/trucks/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+
+### Update Truck Details (Admin Only)
+PUT http://127.0.0.1:8000/api/trucks/1/
+Authorization: Bearer <ADMIN-JWT-TOKEN>
+Content-Type: application/json
+
+{
+  "available": false
+}
+
+### Remove a Truck (Admin Only)
+DELETE http://127.0.0.1:8000/api/trucks/1/
+Authorization: Bearer <ADMIN-JWT-TOKEN>
 
 ### Book a Truck
 POST http://127.0.0.1:8000/api/bookings/
 Content-Type: application/json
-Authorization: Bearer YOUR_ACCESS_TOKEN
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
 {
   "truck_id": 1,
   "pickup_location": "Nairobi",
   "dropoff_location": "Mombasa",
   "date": "2025-04-04"
+}
+
+### Get All Bookings (Admin Only)
+GET http://127.0.0.1:8000/api/bookings/
+Authorization: Bearer <ADMIN-JWT-TOKEN>
+
+### Get Details of a Specific Booking
+GET http://127.0.0.1:8000/api/bookings/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+
+### Get All Bookings for a Specific User
+GET http://127.0.0.1:8000/api/bookings/user/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+
+### Update a Booking (Reschedule)
+PUT http://127.0.0.1:8000/api/bookings/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+Content-Type: application/json
+
+{
+  "pickup_location": "Nairobi",
+  "dropoff_location": "Nakuru",
+  "date": "2025-04-06"
+}
+
+### Cancel a Booking
+DELETE http://127.0.0.1:8000/api/bookings/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+
+### Make a Payment for a Booking
+POST http://127.0.0.1:8000/api/payments/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+Content-Type: application/json
+
+{
+  "booking_id": 1,
+  "amount": 5000
+}
+
+### Get Payment Details
+GET http://127.0.0.1:8000/api/payments/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+
+### Get Reviews for a Truck
+GET http://127.0.0.1:8000/api/trucks/1/reviews/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+
+### Post a Review for a Truck
+POST http://127.0.0.1:8000/api/trucks/1/reviews/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+Content-Type: application/json
+
+{
+  "rating": 4,
+  "comment": "Great service, timely delivery!"
 }
