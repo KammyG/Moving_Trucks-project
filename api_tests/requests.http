@@ -52,23 +52,30 @@ Content-Type: application/json
   "location": "Nairobi",
   "available": true,
   "price_per_km": 120,
-  "license_plate": "KCF 123X",
+  "license_plate": "KCG 456Y",
   "model": "Isuzu NQR",
   "capacity": 3000,
   "owner": 1
 }
 
 ### Get Details of a Specific Truck
-GET http://127.0.0.1:8000/api/trucks/1/
+GET http://127.0.0.1:8000/api/trucks/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
 
 ### Update Truck Details (Admin Only)
 PUT http://127.0.0.1:8000/api/trucks/1/
-Authorization: Bearer <ADMIN-JWT-TOKEN>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
 Content-Type: application/json
 
 {
-  "available": false
+  "name": "Swift Mover Updated",
+  "location": "Nairobi",
+  "available": true,
+  "price_per_km": 150,
+  "license_plate": "KCF 123X",
+  "model": "Isuzu NQR",
+  "capacity": 3500,
+  "owner": 1
 }
 
 ### Remove a Truck (Admin Only)

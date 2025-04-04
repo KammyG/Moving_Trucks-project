@@ -91,6 +91,11 @@ class TruckListView(generics.ListCreateAPIView):
     serializer_class = TruckSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+class TruckUpdateView(generics.UpdateAPIView):
+     queryset = Truck.objects.all()
+     serializer_class = TruckSerializer
+     lookup_field = 'truck_id'
+
 class BookingListView(generics.ListCreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
