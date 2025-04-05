@@ -35,11 +35,22 @@ class BookingSerializer(serializers.ModelSerializer):
 class BookingListView(generics.ListCreateAPIView):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
-    permission_classes = [permissions.IsAuthenticated]  
+    permission_classes = [permissions.IsAuthenticated]
 
-    def perform_create(self, serializer): 
+    def perform_create(self, serializer):
 
-        serializer.save(customer=self.request.user)
+        truck = serializer.validated_data.get('truck')
+        price = calculate_price(truck)  
+
+        
+        serializer.save(customer=self.request.user, price=price)
+
+def calculate_price(truck):
+    
+    if truck.type == 'Large':
+        return 100  
+    return 50  
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
