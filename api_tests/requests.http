@@ -146,7 +146,7 @@ GET http://127.0.0.1:8000/api/trucks/1/reviews/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzOTI4MzgwLCJpYXQiOjE3NDM4NDE5ODAsImp0aSI6IjMxMTdiMjBlOGJjYTRhODA4OWI0ZWRkZmViZTFkZTQzIiwidXNlcl9pZCI6NH0.ods2XWp0aB0daLgDku1yfB359SdgWGdjo-nXLDnpni0
 
 ### Post a Review for a Truck
-POST http://127.0.0.1:8000/api/trucks/1/reviews/
+POST http://127.0.0.1:8000/api/trucks/2/reviews/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzOTI4MzgwLCJpYXQiOjE3NDM4NDE5ODAsImp0aSI6IjMxMTdiMjBlOGJjYTRhODA4OWI0ZWRkZmViZTFkZTQzIiwidXNlcl9pZCI6NH0.ods2XWp0aB0daLgDku1yfB359SdgWGdjo-nXLDnpni0
 Content-Type: application/json
 
