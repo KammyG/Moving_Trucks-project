@@ -91,7 +91,7 @@ class TruckListView(generics.ListCreateAPIView):
     serializer_class = TruckSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-class TruckUpdateView(generics.UpdateAPIView):
+class TruckUpdateView(generics.RetrieveUpdateDestroyAPIView):
      queryset = Truck.objects.all()
      serializer_class = TruckSerializer
      lookup_field = 'id'
