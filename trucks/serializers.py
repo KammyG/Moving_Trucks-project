@@ -27,7 +27,9 @@ class TruckSerializer(serializers.ModelSerializer):
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
-        fields = '__all__'
+        fields = ['id', 'truck', 'pickup_location', 'dropoff_location', 'date', 'price', 'user']  # or 'customer' instead of 'user'
+        read_only_fields = ['user', 'price']
+
 
 # Review Serializer
 class ReviewSerializer(serializers.ModelSerializer):

@@ -83,15 +83,18 @@ DELETE http://127.0.0.1:8000/api/trucks/1/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
 
 ### Book a Truck
-POST http://127.0.0.1:8000/api/bookings/1/
+POST http://127.0.0.1:8000/api/bookings/
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+
 {
-  "truck_id": 1,
+  "truck_id": 2,
   "pickup_location": "Nairobi",
   "dropoff_location": "Mombasa",
   "date": "2025-04-04T15:00:00Z"
 }
+
+
 
 ### Get All Bookings (Admin Only)
 GET http://127.0.0.1:8000/api/bookings/
