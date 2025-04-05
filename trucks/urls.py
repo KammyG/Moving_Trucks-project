@@ -1,5 +1,6 @@
 from django.urls import path
 from rest_framework.response import Response
+from . import views
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -30,6 +31,7 @@ urlpatterns = [
     path('bookings/<int:pk>/', BookingDetailView.as_view(), name='booking-detail'),
     path('trucks/<int:truck_id>/reviews/', TruckReviewListView.as_view(), name='truck-reviews'),
     path("", api_root, name="api-root"),
+    path('api/payments/', views.PaymentView.as_view(), name='payments'),  
     path('trucks/<int:id>/', TruckUpdateView.as_view(), name='truck-update'),
     path('reviews/', ReviewCreateView.as_view(), name='reviews'),
     path('users/delete/', DeleteUserView.as_view(), name='delete-user'),

@@ -1,6 +1,9 @@
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .models import Payment
+from decimal import Decimal
+from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -8,6 +11,8 @@ from django.shortcuts import get_object_or_404
 from .models import Truck, Booking, Review
 from .serializers import UserSerializer, TruckSerializer, BookingSerializer, ReviewSerializer
 from rest_framework.permissions import IsAdminUser
+from rest_framework.exceptions import NotFound, PermissionDenied
+
 
 User = get_user_model()
 
@@ -110,13 +115,58 @@ class BookingDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Booking.objects.filter(user=self.request.user)  
+        # Filter bookings for the authenticated user based on 'customer' field
+        return Booking.objects.filter(customer=self.request.user)  
 
     def delete(self, request, *args, **kwargs):
         instance = self.get_object()
-        if instance.user != request.user:
+        if instance.customer != request.user:
             return Response({"error": "You can only cancel your own bookings."}, status=status.HTTP_403_FORBIDDEN)
         return super().delete(request, *args, **kwargs)
+
+    def get_object(self):
+        """
+        Override the get_object method to fetch the booking instance based on the primary key (id).
+        """
+        booking_id = self.kwargs.get("pk")  
+        try:
+            
+            booking = Booking.objects.get(id=booking_id)
+            
+            if booking.customer != self.request.user:
+                raise PermissionDenied("You don't have permission to view this booking.")
+            return booking
+        except Booking.DoesNotExist:
+            raise NotFound("Booking not found.")
+
+class PaymentView(APIView):
+    permission_classes = [IsAuthenticated]  # Ensure the user is authenticated before making a payment
+
+    def post(self, request):
+
+        amount = request.data.get('amount')
+        if not amount:
+            return Response({"error": "Amount is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            amount = Decimal(amount) 
+        except:
+            return Response({"error": "Invalid amount format"}, status=status.HTTP_400_BAD_REQUEST)
+
+        payment = Payment.objects.create(
+            user=request.user,
+            amount=amount,
+            status='Pending'
+        )
+        payment.status = 'Paid'
+        payment.save()
+        return Response({
+            "message": "Payment processed successfully!",
+            "payment_id": payment.id,
+            "amount": str(payment.amount),
+            "status": payment.status
+        }, status=status.HTTP_200_OK)
+
 
 class ReviewCreateView(generics.CreateAPIView):
     queryset = Review.objects.all()
