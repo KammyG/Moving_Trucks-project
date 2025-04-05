@@ -15,7 +15,7 @@ POST http://127.0.0.1:8000/api/login/
 Content-Type: application/json
 
 {
-  "email": "muriukichristiana@gmail.com",
+  "email": "admin001@gmail.com",
   "password": "bl@ckh@t123#"
 }
 
@@ -85,10 +85,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 ### Book a Truck
 POST http://127.0.0.1:8000/api/bookings/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzODQxNzY5LCJpYXQiOjE3NDM3NTUzNjksImp0aSI6Ijk4MDM2YzhkNTRiMDQxMzJhYTZkYWZiMGY1ZDg4NGJiIiwidXNlcl9pZCI6MX0.OrimOPjv_OjVrv-MvZvc54FxI2_ddnfWQ1VLdduxzfo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzOTI4MzgwLCJpYXQiOjE3NDM4NDE5ODAsImp0aSI6IjMxMTdiMjBlOGJjYTRhODA4OWI0ZWRkZmViZTFkZTQzIiwidXNlcl9pZCI6NH0.ods2XWp0aB0daLgDku1yfB359SdgWGdjo-nXLDnpni0
 
 {
-  "truck_id": 2,
+  "truck": 2,
   "pickup_location": "Nairobi",
   "dropoff_location": "Mombasa",
   "date": "2025-04-04T15:00:00Z"
