@@ -94,7 +94,7 @@ class TruckListView(generics.ListCreateAPIView):
 class TruckUpdateView(generics.UpdateAPIView):
      queryset = Truck.objects.all()
      serializer_class = TruckSerializer
-     lookup_field = 'truck_id'
+     lookup_field = 'id'
 
 class BookingListView(generics.ListCreateAPIView):
     queryset = Booking.objects.all()
